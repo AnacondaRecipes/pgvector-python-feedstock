@@ -2,15 +2,15 @@
 {% set version = "0.5.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/p/pgvector/pgvector-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name.split('-')[0] }}/{{ name.split('-')[0] }}-{{ version }}.tar.gz
   sha256: 07a9dcf735696879406983afc6eba9a787cef7c0cf6c367ca1a5779f036dee74
 
 build:
-  skip: true # [py<39]
+  skip: true # [py<310]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -21,7 +21,6 @@ requirements:
     - pip
   run:
     - python
-    - numpy
 
 test:
   source_files:
