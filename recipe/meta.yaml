@@ -30,7 +30,6 @@ test:
   imports:
     - pgvector
     - pgvector.sqlalchemy
-    - pgvector.utils
     # Requires 'psycopg' package which is not available for now
     # - pgvector.psycopg
     - pgvector.psycopg2
