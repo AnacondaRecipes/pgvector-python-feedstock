@@ -62,7 +62,7 @@ about:
   license: MIT
   license_file: LICENSE.txt
   license_family: MIT
-  doc_url: https://pypi.org/project/pgvector/
+  doc_url: https://pypi.org/project/pgvector
   dev_url: https://github.com/pgvector/pgvector-python
 
 extra:
