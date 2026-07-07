@@ -1,16 +1,16 @@
-{% set name = "pgvector" %}
-{% set version = "0.4.1" %}
+{% set name = "pgvector-python" %}
+{% set version = "0.5.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 83d3a1c044ff0c2f1e95d13dfb625beb0b65506cfec0941bfe81fd0ad44f4003
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name.split('-')[0] }}/{{ name.split('-')[0] }}-{{ version }}.tar.gz
+  sha256: 07a9dcf735696879406983afc6eba9a787cef7c0cf6c367ca1a5779f036dee74
 
 build:
-  skip: true # [py<39]
+  skip: true # [py<310]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -21,7 +21,6 @@ requirements:
     - pip
   run:
     - python
-    - numpy
 
 test:
   source_files:
@@ -30,7 +29,6 @@ test:
   imports:
     - pgvector
     - pgvector.sqlalchemy
-    - pgvector.utils
     # Requires 'psycopg' package which is not available for now
     # - pgvector.psycopg
     - pgvector.psycopg2
@@ -40,7 +38,7 @@ test:
     - pgvector.django
   commands:
     - pip check
-    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - python -c "from importlib.metadata import version; assert(version('pgvector')=='{{ version }}')"
   requires:
     - pip
     - pytest
@@ -55,14 +53,17 @@ test:
     - scipy
 
 about:
-  home: https://github.com/pgvector/pgvector
-  summary: Open-source vector similarity search for Postgres.
-  description: Open-source vector similarity search for Postgres.
-  license: PostgreSQL
+  home: https://github.com/pgvector/pgvector-python
+  summary: pgvector support for Python
+  description: |
+    pgvector support for Python.
+    Great for online recommendations.
+    Supports Django, SQLAlchemy, Psycopg 3, Psycopg 2, asyncpg, pg8000, and Peewee.
+  license: MIT
   license_file: LICENSE.txt
-  license_family: other
-  doc_url: https://github.com/pgvector/pgvector
-  dev_url: https://github.com/pgvector/pgvector
+  license_family: MIT
+  doc_url: https://pypi.org/project/pgvector
+  dev_url: https://github.com/pgvector/pgvector-python
 
 extra:
   recipe-maintainers:
